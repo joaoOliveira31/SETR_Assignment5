@@ -5,3 +5,7 @@ find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
 project(SETR_Assignment5)
 
 target_sources(app PRIVATE src/main.c)
+target_sources(app PRIVATE src/adc.c)
+target_sources(app PRIVATE src/PWM.c)
+target_sources(app PRIVATE src/Filter.c)
+target_sources(app PRIVATE src/Placa.c)
