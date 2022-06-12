@@ -27,7 +27,7 @@
 
 /** Sampling Period
 */
-#define SAMP_PERIOD_MS 50
+#define SAMP_PERIOD_MS 10
 
 
 #define ADC_NID DT_NODELABEL(adc) 

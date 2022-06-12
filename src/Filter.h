@@ -13,16 +13,10 @@
 
 #include <zephyr.h>
 #include <device.h>
-#include <drivers/gpio.h>
-#include <drivers/adc.h>
-#include <string.h>
-#include <devicetree.h>
-#include <sys/printk.h>
-#include <sys/__assert.h>
-#include <timing/timing.h>
+#include <drivers/uart.h>
+#include <stdlib.h>
 #include <stdio.h>
-#include <sys/printk.h>
-#include <hal/nrf_saadc.h>
+#include <string.h>
 
 #ifndef _FILTER_H
 #define _FILTER_H

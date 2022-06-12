@@ -95,8 +95,9 @@ void InitConfig(void){
 	gpio_add_callback(gpio0_dev, &button3_cb_data);
 
         gpio_init_callback(&button4_cb_data, button4_pressed, BIT(button4));
+
 	gpio_add_callback(gpio0_dev, &button4_cb_data);    
-    printk("Config Botões feita\r\n");
+        printk("Config botoes feita\r\n");
         return;
 
 }

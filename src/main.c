@@ -54,6 +54,8 @@ available.
 #include "Filter.h"
 #include "PWM.h"
 #include "Placa.h"
+#include "uart.h"
+
 
 //----------------THREAD CONFIG
 
