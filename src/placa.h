@@ -34,7 +34,7 @@
 #define SAMP_PERIOD_MS 100
 
 extern volatile int dcToggleFlag;
-
+extern  uint8_t c;
 extern uint16_t cd;
 extern struct k_sem sem_cd;
 

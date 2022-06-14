@@ -54,7 +54,7 @@ available.
 #include "Filter.h"
 #include "PWM.h"
 #include "Placa.h"
-#include "uart.h"
+
 
 
 //----------------THREAD CONFIG
@@ -88,6 +88,10 @@ void thread_B_code(void *, void *, void *);
 void thread_C_code(void *, void *, void *);
 void thread_D_code(void *, void *, void *);
 
+
+
+
+
 //------------------SEMS CONFIG + SHARED MEMORY
 
 
@@ -103,7 +107,7 @@ uint16_t bc;
 
 uint16_t cd;
 
-
+uint8_t c;
 //----------------MAIN
 
 /**brief Main function
@@ -119,7 +123,7 @@ uint16_t cd;
 */
 void main(void)
 {
- 
+
     /* Create/Init Semaphores */
     k_sem_init(&sem_ab,0,1);
     k_sem_init(&sem_bc,0,1);
@@ -140,4 +144,6 @@ void main(void)
     thread_D_tid = k_thread_create(&thread_D_data, thread_D_stack,
     K_THREAD_STACK_SIZEOF(thread_D_stack), thread_D_code,
     NULL, NULL, NULL, thread_D_prio, 0, K_NO_WAIT);
+
+     
 }

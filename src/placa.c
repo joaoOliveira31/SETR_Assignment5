@@ -43,7 +43,7 @@ void InitConfig(void){
 	return;
     }
     else {
-        printk("Bind to GPIO0 successfull \n\r");        
+        printk("Bind to GPIO0 successfull \n\n\n\n\n\n\n\n\r");        
     }
     
     ret = gpio_pin_configure(gpio0_dev, button1, GPIO_INPUT | GPIO_PULL_UP);
@@ -97,7 +97,7 @@ void InitConfig(void){
         gpio_init_callback(&button4_cb_data, button4_pressed, BIT(button4));
 
 	gpio_add_callback(gpio0_dev, &button4_cb_data);    
-        printk("Config botoes feita\r\n");
+      
         return;
 
 }
