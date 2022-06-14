@@ -33,8 +33,9 @@ void thread_C_code(void *argA , void *argB, void *argC)
 
     printk("Thread C init (sporadic, waits on a semaphore by task A)\n");
 
-    uint16_t Ti, kp, integ=0 , saidaPI,ref,diff=0;
-    uint16_t erro,erro2=0;
+    int16_t Ti, kp, saidaPI,ref,diff=0;
+    int16_t integ=0;
+    int16_t erro,erro2=0;
     uint16_t valorinserido = 1023;
     ref=1500; 
     int cnt1,soma1,array1[20];
@@ -96,39 +97,42 @@ void thread_C_code(void *argA , void *argB, void *argC)
              {
                 ref = ref - 100;
              }
-             if(ref>=2500)
+             if(ref>=3300)
              {
-               ref = 2500;
+               ref = 3300;
              }
              if(ref<=900)
              {
                 ref = 900;
              }
-             printk("(PID) ref = %4u mv\r\n",ref);
+             printk("(PID) ref = %d mv\r\n",ref);
              erro2=erro;
              erro = ref-tensaoMV;
           
              if (erro>3000) 
-             {  erro = 65535-erro;
-                printk("(PID) erro = -%4u mv\r\n",erro);
-                integ = integ - (erro2+erro)/2; printk("(PID) integ = %4u mv\r\n",integ);  
-                diff=diff + (erro2+erro)/2; printk("(PID) diff = %4u mv\r\n",diff);             
+             {  //erro = 65535-erro;
+                printk("(PID) erro = -%d mv\r\n",erro);
+                integ = integ - (erro2+erro)/2; printk("(PID) integ = %d mv\r\n",integ);  
+                //diff=diff + (erro2+erro)/2; printk("(PID) diff = %4u mv\r\n",diff);             
              }
              else
              {
-                printk("(PID) erro = %4u mv\r\n",erro);
-                integ = integ +  (erro2+erro)/2; printk("(PID) integ = %4u mv\r\n",integ);   
-                diff=diff - (erro2+erro)/2; printk("(PID) diff = %4u mv\r\n",diff);             
+                printk("(PID) erro = %d mv\r\n",erro);
+                integ = integ +  (erro2+erro)/2; printk("(PID) integ = %d mv\r\n",integ);   
+                //diff=diff - (erro2+erro)/2; printk("(PID) diff = %4u mv\r\n",diff);             
              } 
-                        
-             saidaPI=kp*erro+(1/Ti)*integ+Td*diff;               
+             if(integ > 20000)
+              integ = 20000;
+             if(integ < -20000)
+              integ = -20000;
+             saidaPI=kp*erro+(1/Ti)*integ;//+Td*diff;               
                
              if (saidaPI > 3000)
              {
-                 saidaPI = 65535-saidaPI ;
-                 printk("(PID) saidaPI = %4u mv\r\n",saidaPI);    
+                 //saidaPI = 65535-saidaPI ;
+                 printk("(PID) saidaPI = %d mv\r\n",saidaPI);    
              }
-             else printk("(PID) saidaPI = %4u mv\r\n",saidaPI);    
+             else printk("(PID) saidaPI = %d mv\r\n",saidaPI);    
              duty=(uint16_t)100-(saidaPI)/30;
              
              if (duty > 100)
