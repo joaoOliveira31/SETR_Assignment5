@@ -10,7 +10,7 @@ void thread_C_code(void *argA , void *argB, void *argC)
     const struct device *pwm0_dev;          /* Pointer to PWM device structure */
     unsigned int pwmPeriod_us = 1000;       /* PWM priod in us */
 
-    int mode = 2;
+    int mode = 1;
     
 /* Bind to GPIO 0 and PWM0 */
     gpio0_dev = device_get_binding(DT_LABEL(GPIO0_NID));
@@ -40,11 +40,16 @@ void thread_C_code(void *argA , void *argB, void *argC)
     ref=1500; 
     int cnt1,soma1,array1[20];
     int tensaoMV;
-    int tensaoambiente=(uint16_t)(1000*bc*((float)3/1023));
+    int tensaoambiente=0;
+    int flag=0;
     while(1) 
     {
         k_sem_take(&sem_cd, K_FOREVER);        
         
+        if(flag<10){
+        tensaoambiente=(uint16_t)(1000*bc*((float)3/1023));
+        flag++;
+        }
         
         printk("Botao: %d\r\n",cd);           //Escolher o modo, (Mode 1 => Manual), (Mode 2 => Automático)
 
@@ -77,12 +82,14 @@ void thread_C_code(void *argA , void *argB, void *argC)
                 duty = 0;
             }
              tensaoMV=(uint16_t)(1000*bc*((float)3/1023));printk("Tensao no sensor => %4u mv\n\r",tensaoMV); 
+             printk("Tensao ambiente => %4u mv\n\r",tensaoambiente);
         }
          
         else
         {
             printk("Modo Automatico    REF->UP/DOWN\r\n");            
             tensaoMV=(uint16_t)(1000*bc*((float)3/1023));printk("Tensao no sensor => %4u mv\n\r",tensaoMV);   
+            printk("Tensao ambiente => %4u mv\n\r",tensaoambiente);
                            
             
             //PI CONTROLER
@@ -101,9 +108,9 @@ void thread_C_code(void *argA , void *argB, void *argC)
              {
                ref = 3300;
              }
-             if(ref<=900)
+             if(ref<=tensaoambiente)
              {
-                ref = 900;
+                ref = tensaoambiente+100;
              }
              printk("(PID) ref = %d mv\r\n",ref);
              erro2=erro;
