@@ -42,7 +42,7 @@ void clkPrint(){
     min=0;
     day++;
   }
-  if(day==31 && hour>=23 )
+  if(day==31 && hora>=23 )
   {
     day=1;  
   }
@@ -268,7 +268,7 @@ void thread_C_code(void *argA , void *argB, void *argC)
             printk("\n\n\n");
             printk("**Modo Automatico*** |  (REF --> UP/DOWN)          | Butao 1 => Manual  \n"
                    "******************** |  Tensao ambiente => %4u mv  | Butao 3 => Ref+    \n"
-                   " %ddia:%dh:%dm:%ds   |  Tensao no sensor => %4u mv | Butao 4 => Ref-    \n"
+                   " %ddia  %dh:%dm:%ds  |  Tensao no sensor => %4u mv | Butao 4 => Ref-    \n"
                    "******************** ******************************************************\n"  
                    " (PID) ref = %d mv   |       Duty = %d %           | (PID) integ = %d mv\n"  
                    " (PID) erro = %d mv  |  (PID) saidaPI = %d mv      | (PID) diff = %d mv \n"
@@ -306,27 +306,34 @@ void thread_C_code(void *argA , void *argB, void *argC)
                  integ = integ + erro2; //printk("(PID) integ = %d mv\r\n",integ);   
                  diff = (erro2-erro)/0.1;// printk("(PID) diff = %d mv\r\n",diff);             
               
-                 if(integ > 2000) integ = 2000;
+                 if(integ > 3000) integ = 3000;
 
-                 else if(diff < -2000) diff = -2000;
+                 else if(diff < -5000) diff = -5000;
 
-                 if(diff > 2000) diff = 2000;
+                 if(diff > 5000) diff = 5000;
 
                  else if(integ < -2000) integ = -2000;
 
                  saidaPI = kp * erro + (1 / Ti) * integ + Td*diff; //printk("(PID) saidaPI = %d mv\r\n\n",saidaPI);                
                           
                  for (int i = 0; i < arrLen; i++) {
-                      if (dayOn[i] == day) {
-                        if(horasOn[i]== hora){
-                      duty = (uint16_t)100 - (saidaPI) / 30;
+                      if (dayOn[i] == day)
+                      {
+                        if(horasOn[i]== hora)
+                        {
+                            duty = (uint16_t)100 - (saidaPI) / 30;
              
-                      if (duty > 100)  duty = 100;
+                            if (duty > 98)  duty = 98;
              
-                      else if (duty < 0) duty = 0; 
-                       break;
-                  }}
+                            else if (duty < 0) duty = 0; 
+                    
+                        }
+                     
+                     else{
                      duty=100; 
+                     tensaoambiente=(uint16_t)(1000*bc*((float)3/1023));
+                     erro=0,diff=0,integ=0,saidaPI=0;}
+                }
                 }                                                                             
        } 
        }
