@@ -7,7 +7,7 @@
 * samples.
 *
 * \author Goncalo Moniz, Joao Oliveira, Diogo Leao
-* \date 31-5-2022
+* \date 21-6-2022
 * \bug There are no bugs
 */
 
@@ -34,7 +34,7 @@ extern struct k_sem sem_bc;
 * void
 * void
 * \return void
-* \date 31-5-2022
+* \date 21-6-2022
 */
 void thread_B_code(void *argA , void *argB, void *argC);
 

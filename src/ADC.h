@@ -2,10 +2,10 @@
 * \brief ADC Input Sensor
 * 
 * Process the input signal using an adc
-* Input sensor: Emulated by a 10 kO potentiometer, supplied by the DevKit 3 V supply(VDD).
+* Input sensor: Light Sensor, supplied by the DevKit 3 V supply(VDD).
 * 
 * \author Goncalo Moniz, Joao Oliveira, Diogo Leao
-* \date 31-5-2022
+* \date 21-6-2022
 * \bug There are no bugs
 */
 

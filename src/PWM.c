@@ -7,8 +7,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-static const char prompt[] = "Character echo started ...\r\n";
-
 int hour,seg,min,min1,min2,hora,hora1,hora2,day1,day2,lux=0;
 int day=1;
 int dayOn[]={0,0,0,0,0,0,0,0,0,0,0,0,0,0};
@@ -94,7 +92,7 @@ void thread_C_code(void *argA , void *argB, void *argC)
     }
 
     printk("Thread C init (sporadic, waits on a semaphore by task A)\n");  
-    printk("dummy line");
+
     while(1) 
     {
      
