@@ -24,7 +24,7 @@
 extern uint16_t ab,bc;
 
 extern struct k_sem sem_ab;
-extern struct k_sem sem_bc;
+
 
 /**Thread B 
 * 

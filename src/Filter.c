@@ -52,7 +52,6 @@ void thread_B_code(void *argA , void *argB, void *argC)
      bc = media2;//data_ab->data;
      soma=0;
      cnt2=0;
-     k_sem_give(&sem_bc);
        
   }
 }

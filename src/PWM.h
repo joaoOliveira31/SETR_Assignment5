@@ -33,10 +33,8 @@
 #define GPIO0_NID DT_NODELABEL(gpio0) 
 #define PWM0_NID DT_NODELABEL(pwm0) 
 
-extern uint16_t bc;
 extern uint16_t cd;
-
-extern struct k_sem sem_bc;
+extern uint16_t bc;
 extern struct k_sem sem_cd;
 
 /**Thread C

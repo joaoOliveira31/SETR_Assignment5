@@ -96,7 +96,6 @@ void thread_D_code(void *, void *, void *);
 
 
 struct k_sem sem_ab;
-struct k_sem sem_bc;
 struct k_sem sem_cd;
 /** Shared memory betwen ADC and Filter.
  */ 
@@ -104,9 +103,9 @@ uint16_t ab;
 /** Shared memory betwen Fiter and PWM.
  */ 
 uint16_t bc;
-
+/** Shared memory betwen buttons and PWM.
+ */ 
 uint16_t cd;
-
 uint8_t c;
 //----------------MAIN
 
@@ -126,7 +125,6 @@ void main(void)
 
     /* Create/Init Semaphores */
     k_sem_init(&sem_ab,0,1);
-    k_sem_init(&sem_bc,0,1);
     k_sem_init(&sem_cd,0,1);
     /* Then create the task */
     thread_A_tid = k_thread_create(&thread_A_data, thread_A_stack,
