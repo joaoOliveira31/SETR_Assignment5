@@ -5,7 +5,7 @@
 * Output: pwm signal applied to one of the DevKit leds.
 *
 * \author Goncalo Moniz, Joao Oliveira, Diogo Leao
-* \date 21-6-2022
+* \date 31-5-2022
 * \bug There are no bugs
 */
 
@@ -38,17 +38,6 @@ extern uint16_t cd;
 
 extern struct k_sem sem_bc;
 extern struct k_sem sem_cd;
-/**ClkPrint()
-* 
-* This function does the clock count
-* \author Goncalo Moniz, Joao Oliveira, Diogo Leao
-* \param[in,out] 
-*void
-*void
-* \return void
-* \date 21-6-2022
-*/
-void clkPrint();
 
 /**Thread C
 * 
@@ -58,7 +47,7 @@ void clkPrint();
 *void
 *void
 * \return void
-* \date 21-6-2022
+* \date 31-5-2022
 */
 void thread_C_code(void *argA , void *argB, void *argC);
 

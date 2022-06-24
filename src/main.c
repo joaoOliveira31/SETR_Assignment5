@@ -1,32 +1,40 @@
 /** \file main.c
 * \brief The system does a basic processing of an analog signal. It reads the input voltage
-from an analog sensor and from the buttons. It digitally filters the signal and outputs the desired LUX.
+from an analog sensor, digitally filters the signal and outputs it.
 *
-*The sistem starts in Manual Mode and changes the strength of the LED with the duty-cycle. In automatic mode, it asks to input the current time and the time that
-*the LED will be on at the required voltage.  
+* The system toogles the duty cycle os the pwm signal that is connected to the LED1(output) in function of the concurrent voltage os the 
+*potenciometer(input). The information is shared between the treads using Semaphores and Shared Memory
 * 
 *
 * \author Goncalo Moniz, Joao Oliveira, Diogo Leao
-* \date 21-6-2022
+* \date 31-5-2022
 * \bug There are no bugs
 */
 
 /**
-@mainpage ASSIGNMENT 5
+@mainpage ASSIGNMENT 4 PART 1
 @author Goncalo Moniz, Joao Oliveira, Diogo Leao
 
-The aim of this assignment is to learn how to implement a simple closed loop control application in
-Zephyr, using the real-time model. The application mimics the typical structure of reactive real-time
-applications, comprising a sensor, decision logic and actuation. 
+The aim of this assignment is to learn how to implement a set of cooperative real-time tasks in
+Zephyr. Replicating the typical structure of embedded software, a mix of periodic and sporadic
+tasks will be considered.
 
-The objective is to develop an application to control the light intensity of a given region. The
-system comprises a light sensor, an illumination system and a Human-Machine Interface. The
-system can operate in two modes: 
-• Automatic: programmable via the terminal. Should allow setting On/Off periods and the
-corresponding light intensity;
-• Manual: interface via the DevKit buttons. Allows to turn the system On/Off (when in “Off”
-the system operates in automatic mode), via two of the buttons(Button 1 for manual mode and Button 2 for auto mode) . The other two buttons allow
-to set (increase/decrease(Button 4/Button 3) the desired intensity.
+The system to implement does a basic processing of an analog signal. It reads the input voltage
+from an analog sensor, digitally filters the signal and outputs it.
+
+. Input sensor: Emulated by a 10 kO potentiometer, supplied by the DevKit 3 V supply
+(VDD).
+
+. Digital filter: moving average filter, with a window size of 10 samples. Removes the
+outliers (10% or high deviation from average) and computes the average of the remaining
+samples. 
+
+. Output: pwm signal applied to one of the DevKit leds.
+
+The system shall be structured with at least three tasks, matching the basic processing blocks,
+namely one task for acquiring the sample, one for filtering and the other to output the signal.
+The sampling task is periodic, while the other two are sporadic, being activated when new data is
+available.
 
 
 */
@@ -96,8 +104,7 @@ uint16_t ab;
 /** Shared memory betwen Fiter and PWM.
  */ 
 uint16_t bc;
-/** Shared memory betwen PWM and Buttons.
- */ 
+
 uint16_t cd;
 
 uint8_t c;
@@ -112,7 +119,7 @@ uint8_t c;
 *void
 *void
 * \return void
-* \date 21-6-2022
+* \date 31-5-2022
 */
 void main(void)
 {

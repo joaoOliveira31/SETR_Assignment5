@@ -1,11 +1,11 @@
 /** @file Placa.h
- * @brief Variaveis e programaÁ„o da placa
+ * @brief Variaveis e programa√ß√£o da placa
  *
  * Este modulo inicia as portas da placa que queremos usar e verifica
- * se n„o ocorreu nenhum erro
+ * se n√£o ocorreu nenhum erro
  * 
  * 
- * @author Goncalo Moniz, Jo„o Oliveira, Diogo Le„o
+ * @author Goncalo Moniz, Jo√£o Oliveira, Diogo Le√£o
  * @bug No known bugs.
  */
 
